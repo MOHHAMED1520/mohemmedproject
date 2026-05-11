@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="نظام إدارة المهام الجامعية - منصة ذكية متكاملة لإدارة الواجبات والمشاريع والاختبارات الجامعية" />
+  <meta name="author" content="محمد عبدالله الفتيني" />
+  <title>نظام إدارة المهام الجامعية | محمد عبدالله الفتيني</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Particles Background -->
+  <div id="particles-container"></div>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+  <div class="bg-orb orb-3"></div>
+
+  <!-- Loading Screen -->
+  <div id="loader" class="loader-screen">
+    <div class="loader-content">
+      <div class="loader-logo">UT</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+      <p>جارٍ تحميل النظام...</p>
+    </div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="topbar" id="topbar">
+    <div class="container nav-wrap">
+      <div class="brand">
+        <div class="logo">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div>
+          <strong>نظام إدارة المهام الجامعية</strong>
+          <span>منصة ذكية لتنظيم الإنجاز الدراسي</span>
+        </div>
+      </div>
+      <nav id="mainNav">
+        <a href="#features"><i class="fa-solid fa-star"></i> المميزات</a>
+        <a href="#dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</a>
+        <a href="#tasks"><i class="fa-solid fa-list-check"></i> المهام</a>
+        <a href="#analytics"><i class="fa-solid fa-chart-bar"></i> التحليلات</a>
+        <a href="#about"><i class="fa-solid fa-circle-info"></i> عن النظام</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="btn-icon" id="themeToggle" title="تبديل المظهر">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button class="burger" id="burger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#features" onclick="closeMobileNav()"><i class="fa-solid fa-star"></i> المميزات</a>
+    <a href="#dashboard" onclick="closeMobileNav()"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</a>
+    <a href="#tasks" onclick="closeMobileNav()"><i class="fa-solid fa-list-check"></i> المهام</a>
+    <a href="#analytics" onclick="closeMobileNav()"><i class="fa-solid fa-chart-bar"></i> التحليلات</a>
+    <a href="#about" onclick="closeMobileNav()"><i class="fa-solid fa-circle-info"></i> عن النظام</a>
+  </div>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero container animate__animated animate__fadeIn">
+      <div class="hero-text">
+        <span class="badge pulse-badge">
+          <i class="fa-solid fa-bolt"></i>
+          الإصدار 2.0 المطوّر — مع ذكاء اصطناعي
+        </span>
+        <h1>نظّم <span class="gradient-text">مهامك الجامعية</span> بذكاء واحترافية</h1>
+        <p>
+          منصة متكاملة لإدارة الواجبات، المشاريع، والاختبارات بتصميم عالمي حديث.
+          مزوّدة بمساعد ذكاء اصطناعي، تحليلات بيانية، وتجربة مستخدم سلسة.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#tasks">
+            <i class="fa-solid fa-plus"></i> ابدأ الآن
+          </a>
+          <a class="btn btn-secondary" href="#dashboard">
+            <i class="fa-solid fa-eye"></i> استعراض النظام
+          </a>
+        </div>
+        <div class="stats-inline">
+          <div class="stat-item">
+            <i class="fa-solid fa-list-check stat-icon blue"></i>
+            <strong id="totalInline">0</strong>
+            <span>إجمالي المهام</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa-solid fa-circle-check stat-icon green"></i>
+            <strong id="completedInline">0</strong>
+            <span>مكتملة</span>
+          </div>
+          <div class="stat-item">
+            <i class="fa-solid fa-chart-line stat-icon orange"></i>
+            <strong id="progressInline">0%</strong>
+            <span>نسبة الإنجاز</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80" alt="طلاب يتعاونون في الدراسة" />
+          <div class="img-overlay"></div>
+        </div>
+        <div class="floating-card card-a animate__animated animate__bounceIn animate__delay-1s">
+          <i class="fa-solid fa-fire" style="color:#ffb020"></i>
+          <div>
+            <span>إنجاز هذا الأسبوع</span>
+            <strong id="weeklyCount">+0 مهمة</strong>
+          </div>
+        </div>
+        <div class="floating-card card-b animate__animated animate__bounceIn animate__delay-2s">
+          <i class="fa-solid fa-robot" style="color:#4f8cff"></i>
+          <div>
+            <span>مساعد ذكي</span>
+            <strong>متاح دائماً</strong>
+          </div>
+        </div>
+        <div class="floating-card card-c animate__animated animate__bounceIn animate__delay-3s">
+          <i class="fa-solid fa-shield-halved" style="color:#25c18d"></i>
+          <div>
+            <span>بياناتك محفوظة</span>
+            <strong>تخزين محلي آمن</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section id="features" class="container section">
+      <div class="section-title center">
+        <span><i class="fa-solid fa-wand-magic-sparkles"></i> المميزات</span>
+        <h2>تصميم عالمي وإمكانيات متقدمة</h2>
+        <p class="section-sub">مبني بأحدث معايير تطوير الويب العالمية لتجربة استخدام لا مثيل لها</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon" style="background:rgba(79,140,255,.15);color:#4f8cff">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <h3>مساعد ذكاء اصطناعي</h3>
+          <p>مساعد ذكي يجيب على كل استفساراتك حول إدارة المهام والجدول الدراسي فوراً.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" style="background:rgba(37,193,141,.15);color:#25c18d">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <h3>تحليلات بيانية متقدمة</h3>
+          <p>رسوم بيانية تفاعلية لعرض نسب الإنجاز وتوزيع المهام حسب التصنيف والأولوية.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" style="background:rgba(255,176,32,.15);color:#ffb020">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <h3>تنبيهات ذكية</h3>
+          <p>تنبيهات فورية للمهام المتأخرة والمواعيد النهائية القريبة لتبقى دائماً في الموعد.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" style="background:rgba(255,100,103,.15);color:#ff6467">
+            <i class="fa-solid fa-mobile-screen"></i>
+          </div>
+          <h3>متجاوب بالكامل</h3>
+          <p>تجربة مثالية على جميع الأجهزة — هاتف، تابلت، أو كمبيوتر بدون أي فارق.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" style="background:rgba(167,139,250,.15);color:#a78bfa">
+            <i class="fa-solid fa-filter"></i>
+          </div>
+          <h3>فلترة وبحث متقدم</h3>
+          <p>ابحث عن أي مهمة وصفّ القائمة حسب الأولوية أو التاريخ أو التصنيف بنقرة واحدة.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" style="background:rgba(34,211,238,.15);color:#22d3ee">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <h3>تخزين محلي دائم</h3>
+          <p>بياناتك محفوظة محلياً في متصفحك تلقائياً دون الحاجة لسيرفر أو إنشاء حساب.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" style="background:rgba(251,146,60,.15);color:#fb923c">
+            <i class="fa-solid fa-file-export"></i>
+          </div>
+          <h3>تصدير المهام</h3>
+          <p>صدّر قائمة مهامك بصيغة JSON أو CSV لمشاركتها أو حفظ نسخة احتياطية خارجية.</p>
+        </article>
+        <article class="feature-card">
+          <div class="feature-icon" style="background:rgba(244,114,182,.15);color:#f472b6">
+            <i class="fa-solid fa-palette"></i>
+          </div>
+          <h3>وضع فاتح وداكن</h3>
+          <p>اختر بين الوضع الداكن الاحترافي والوضع الفاتح المريح حسب تفضيلك الشخصي.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== DASHBOARD ===== -->
+    <section id="dashboard" class="container section dashboard-wrap">
+      <div class="section-title center">
+        <span><i class="fa-solid fa-gauge-high"></i> لوحة التحكم</span>
+        <h2>نظرة شاملة على أدائك الدراسي</h2>
+      </div>
+      <div class="dashboard-grid">
+        <div class="metric-card blue" onclick="scrollToSection('tasks')">
+          <div class="metric-icon"><i class="fa-solid fa-list-check"></i></div>
+          <div class="metric-body">
+            <span>إجمالي المهام</span>
+            <strong id="totalTasks">0</strong>
+          </div>
+          <div class="metric-trend up">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+          </div>
+        </div>
+        <div class="metric-card green" onclick="scrollToSection('tasks')">
+          <div class="metric-icon"><i class="fa-solid fa-circle-check"></i></div>
+          <div class="metric-body">
+            <span>المكتملة</span>
+            <strong id="completedTasks">0</strong>
+          </div>
+          <div class="metric-trend up">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+          </div>
+        </div>
+        <div class="metric-card orange" onclick="scrollToSection('tasks')">
+          <div class="metric-icon"><i class="fa-solid fa-spinner"></i></div>
+          <div class="metric-body">
+            <span>قيد التنفيذ</span>
+            <strong id="inProgressTasks">0</strong>
+          </div>
+          <div class="metric-trend">
+            <i class="fa-solid fa-minus"></i>
+          </div>
+        </div>
+        <div class="metric-card red" onclick="scrollToSection('tasks')">
+          <div class="metric-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="metric-body">
+            <span>متأخرة</span>
+            <strong id="lateTasks">0</strong>
+          </div>
+          <div class="metric-trend down">
+            <i class="fa-solid fa-arrow-trend-down"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="overall-progress">
+        <div class="progress-header">
+          <span>نسبة الإنجاز الإجمالية</span>
+          <strong id="overallPct">0%</strong>
+        </div>
+        <div class="overall-bar">
+          <div class="overall-fill" id="overallFill" style="width:0%"></div>
+        </div>
+        <div class="progress-labels">
+          <span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ANALYTICS ===== -->
+    <section id="analytics" class="container section">
+      <div class="section-title center">
+        <span><i class="fa-solid fa-chart-bar"></i> التحليلات</span>
+        <h2>رسوم بيانية تفاعلية لأدائك</h2>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3><i class="fa-solid fa-chart-pie"></i> توزيع المهام حسب الحالة</h3>
+          <canvas id="statusChart" height="240"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3><i class="fa-solid fa-chart-bar"></i> توزيع المهام حسب الأولوية</h3>
+          <canvas id="priorityChart" height="240"></canvas>
+        </div>
+        <div class="chart-card wide">
+          <h3><i class="fa-solid fa-chart-line"></i> توزيع المهام حسب التصنيف</h3>
+          <canvas id="categoryChart" height="180"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TASKS SECTION ===== -->
+    <section id="tasks" class="container section task-section">
+      <div class="section-title center">
+        <span><i class="fa-solid fa-list-check"></i> إدارة المهام</span>
+        <h2>أضف، تابع، وأنجز مهامك بكفاءة</h2>
+      </div>
+      <div class="task-layout">
+
+        <!-- Form Panel -->
+        <div class="panel form-panel" id="formPanel">
+          <div class="panel-header">
+            <h3><i class="fa-solid fa-plus-circle"></i> <span id="formTitle">إضافة مهمة جديدة</span></h3>
+          </div>
+          <form id="taskForm">
+            <input type="hidden" id="editId" value="" />
+            <div class="form-group">
+              <label for="title">
+                <i class="fa-solid fa-heading"></i> عنوان المهمة
+              </label>
+              <input type="text" id="title" placeholder="مثال: تسليم مشروع تطوير الويب" required />
+            </div>
+            <div class="form-group">
+              <label for="description">
+                <i class="fa-solid fa-align-right"></i> الوصف
+              </label>
+              <textarea id="description" rows="3" placeholder="اكتب تفاصيل المهمة هنا..."></textarea>
+            </div>
+            <div class="field-row">
+              <div class="form-group">
+                <label for="category">
+                  <i class="fa-solid fa-tag"></i> التصنيف
+                </label>
+                <select id="category">
+                  <option value="واجب">📝 واجب</option>
+                  <option value="مشروع">💼 مشروع</option>
+                  <option value="اختبار">📋 اختبار</option>
+                  <option value="مذاكرة">📚 مذاكرة</option>
+                  <option value="تقرير">📄 تقرير</option>
+                  <option value="عرض">🎤 عرض تقديمي</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="priority">
+                  <i class="fa-solid fa-flag"></i> الأولوية
+                </label>
+                <select id="priority">
+                  <option value="منخفضة">🟢 منخفضة</option>
+                  <option value="متوسطة" selected>🟡 متوسطة</option>
+                  <option value="عالية">🔴 عالية</option>
+                  <option value="حرجة">🚨 حرجة</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="form-group">
+                <label for="dueDate">
+                  <i class="fa-solid fa-calendar"></i> تاريخ التسليم
+                </label>
+                <input type="date" id="dueDate" />
+              </div>
+              <div class="form-group">
+                <label for="subject">
+                  <i class="fa-solid fa-book"></i> المادة
+                </label>
+                <input type="text" id="subject" placeholder="مثال: هندسة البرمجيات" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="progress">
+                <i class="fa-solid fa-percent"></i> نسبة التقدّم: <strong id="progressLabel">25%</strong>
+              </label>
+              <input type="range" id="progress" min="0" max="100" value="25" oninput="document.getElementById('progressLabel').textContent=this.value+'%'" />
+              <div class="range-marks"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+            </div>
+            <div class="form-group">
+              <label for="notes">
+                <i class="fa-solid fa-note-sticky"></i> ملاحظات إضافية
+              </label>
+              <textarea id="notes" rows="2" placeholder="أي ملاحظات أو تذكيرات..."></textarea>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary full" type="submit" id="submitBtn">
+                <i class="fa-solid fa-floppy-disk"></i> حفظ المهمة
+              </button>
+              <button class="btn btn-ghost" type="button" id="cancelEdit" style="display:none" onclick="cancelEditMode()">
+                <i class="fa-solid fa-xmark"></i> إلغاء التعديل
+              </button>
+            </div>
+          </form>
+
+          <!-- Quick Export -->
+          <div class="export-section">
+            <p><i class="fa-solid fa-file-export"></i> تصدير المهام</p>
+            <div class="export-btns">
+              <button class="btn btn-sm" onclick="exportJSON()">
+                <i class="fa-solid fa-file-code"></i> JSON
+              </button>
+              <button class="btn btn-sm" onclick="exportCSV()">
+                <i class="fa-solid fa-file-csv"></i> CSV
+              </button>
+              <button class="btn btn-sm" onclick="importTasks()">
+                <i class="fa-solid fa-file-import"></i> استيراد
+              </button>
+              <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)" />
+            </div>
+          </div>
+        </div>
+
+        <!-- List Panel -->
+        <div class="panel list-panel">
+          <div class="list-controls">
+            <!-- Search -->
+            <div class="search-wrap">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" id="searchInput" placeholder="ابحث عن مهمة..." oninput="renderTasks()" />
+            </div>
+            <!-- Sort -->
+            <select id="sortSelect" onchange="renderTasks()" class="sort-select">
+              <option value="date">ترتيب حسب التاريخ</option>
+              <option value="priority">ترتيب حسب الأولوية</option>
+              <option value="progress">ترتيب حسب التقدّم</option>
+              <option value="title">ترتيب أبجدي</option>
+            </select>
+          </div>
+
+          <!-- Filters -->
+          <div class="filters-wrap">
+            <div class="filters">
+              <button class="filter-btn active" data-filter="الكل">
+                <i class="fa-solid fa-border-all"></i> الكل
+              </button>
+              <button class="filter-btn" data-filter="قيد التنفيذ">
+                <i class="fa-solid fa-spinner"></i> قيد التنفيذ
+              </button>
+              <button class="filter-btn" data-filter="مكتملة">
+                <i class="fa-solid fa-circle-check"></i> مكتملة
+              </button>
+              <button class="filter-btn" data-filter="متأخرة">
+                <i class="fa-solid fa-triangle-exclamation"></i> متأخرة
+              </button>
+            </div>
+            <button class="btn btn-danger-sm" onclick="clearAllTasks()" title="حذف كل المهام">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          </div>
+
+          <!-- Task Count -->
+          <div class="task-count-bar">
+            <span id="taskCountLabel">يتم التحميل...</span>
+          </div>
+
+          <!-- Task List -->
+          <div id="taskList" class="task-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="container section about-section">
+      <div class="about-card">
+        <div class="about-icon">
+          <i class="fa-solid fa-user-graduate"></i>
+        </div>
+        <div class="about-content">
+          <span class="badge"><i class="fa-solid fa-pen-nib"></i> إنشاء وإعداد</span>
+          <h2>محمد عبدالله الفتيني</h2>
+          <p>
+            هذا النظام من تصميم وتطوير وإعداد <strong>محمد عبدالله الفتيني</strong>.
+            تم بناؤه بأحدث تقنيات تطوير الويب الحديثة، مع مراعاة أعلى معايير تجربة المستخدم العربية
+            وإضافة مساعد ذكاء اصطناعي متكامل للرد على جميع الاستفسارات.
+          </p>
+          <div class="about-tags">
+            <span class="tech-tag"><i class="fa-brands fa-html5"></i> HTML5</span>
+            <span class="tech-tag"><i class="fa-brands fa-css3-alt"></i> CSS3</span>
+            <span class="tech-tag"><i class="fa-brands fa-js"></i> JavaScript</span>
+            <span class="tech-tag"><i class="fa-solid fa-robot"></i> AI Chatbot</span>
+            <span class="tech-tag"><i class="fa-solid fa-chart-pie"></i> Chart.js</span>
+            <span class="tech-tag"><i class="fa-brands fa-github"></i> GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-wrap">
+      <div class="footer-brand">
+        <div class="logo sm"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <strong>نظام إدارة المهام الجامعية</strong>
+          <p>منصة ذكية لتنظيم الإنجاز الدراسي</p>
+        </div>
+      </div>
+      <div class="footer-center">
+        <p>
+          <i class="fa-solid fa-pen-nib"></i>
+          إنشاء وإعداد: <strong>محمد عبدالله الفتيني</strong>
+        </p>
+        <p style="color:var(--muted);font-size:.85rem;margin-top:4px">
+          © 2025 — جميع الحقوق محفوظة
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#features"><i class="fa-solid fa-star"></i> المميزات</a>
+        <a href="#dashboard"><i class="fa-solid fa-chart-pie"></i> لوحة التحكم</a>
+        <a href="#tasks"><i class="fa-solid fa-list-check"></i> المهام</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== AI CHATBOT FLOATING BUTTON ===== -->
+  <div id="chatbotContainer" class="chatbot-container">
+    <!-- Toggle Button -->
+    <button id="chatbotToggle" class="chatbot-toggle" onclick="toggleChatbot()" title="المساعد الذكي">
+      <i class="fa-solid fa-robot" id="chatbotIcon"></i>
+      <span class="chatbot-badge" id="chatbotBadge">1</span>
+      <div class="chatbot-pulse"></div>
+    </button>
+
+    <!-- Chatbot Window -->
+    <div id="chatbotWindow" class="chatbot-window hidden">
+      <div class="chatbot-header">
+        <div class="chatbot-info">
+          <div class="chatbot-avatar">
+            <i class="fa-solid fa-robot"></i>
+            <div class="chatbot-status-dot"></div>
+          </div>
+          <div>
+            <strong>المساعد الذكي</strong>
+            <span>متاح الآن • نظام إدارة المهام</span>
+          </div>
+        </div>
+        <div class="chatbot-header-actions">
+          <button onclick="clearChat()" title="مسح المحادثة"><i class="fa-solid fa-broom"></i></button>
+          <button onclick="toggleChatbot()" title="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <div id="chatMessages" class="chat-messages">
+        <!-- Welcome message -->
+        <div class="chat-msg bot">
+          <div class="msg-avatar"><i class="fa-solid fa-robot"></i></div>
+          <div class="msg-content">
+            <p>مرحباً! 👋 أنا المساعد الذكي لنظام إدارة المهام الجامعية.</p>
+            <p>يمكنني مساعدتك في:</p>
+            <ul>
+              <li>إدارة وتنظيم مهامك الدراسية</li>
+              <li>نصائح لتحسين إنتاجيتك</li>
+              <li>الإجابة على أسئلتك حول النظام</li>
+              <li>إرشادك لاستخدام جميع الميزات</li>
+            </ul>
+            <p>بماذا يمكنني مساعدتك؟ 😊</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Replies -->
+      <div class="quick-replies" id="quickReplies">
+        <button onclick="quickReply('كيف أضيف مهمة جديدة؟')">كيف أضيف مهمة؟</button>
+        <button onclick="quickReply('ما هي إحصائياتي الحالية؟')">إحصائياتي</button>
+        <button onclick="quickReply('كيف أصدّر المهام؟')">تصدير المهام</button>
+        <button onclick="quickReply('نصائح لتنظيم المهام')">نصائح مفيدة</button>
+      </div>
+
+      <div class="chat-input-wrap">
+        <textarea
+          id="chatInput"
+          placeholder="اكتب سؤالك هنا..."
+          rows="1"
+          onkeydown="handleChatKey(event)"
+          oninput="autoResizeTextarea(this)"
+        ></textarea>
+        <button id="sendBtn" onclick="sendMessage()" title="إرسال">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+      <div class="chatbot-footer">
+        <i class="fa-solid fa-shield-halved"></i> محادثتك خاصة ومحفوظة محلياً
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">تم بنجاح</span>
+  </div>
+
+  <!-- Confirm Modal -->
+  <div id="confirmModal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <div class="modal-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h3 id="confirmTitle">تأكيد الإجراء</h3>
+      <p id="confirmMsg">هل أنت متأكد؟</p>
+      <div class="modal-actions">
+        <button class="btn btn-danger" id="confirmYes">تأكيد</button>
+        <button class="btn btn-ghost" onclick="closeConfirm()">إلغاء</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button id="backToTop" class="back-to-top hidden" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="fa-solid fa-chevron-up"></i>
+  </button>
+
+  <script src="app.js"></script>
+</body>
+</html>
